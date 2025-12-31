@@ -79,4 +79,38 @@ class Tarea:
       self._tareas.append(nueva)
       return nueva
 
+    def editar(self, tarea_id: int, nuevo_titulo: str) -> Tarea:
+      t = self.buscar_por_id(tarea_id)
+      if not t:
+        raise ValueError("No existe una tarra con ese ID.")
+      t.titulo = validar_titulo(nuevo_titulo)
+      t.actualizada_en = ahora_iso()
+      return t
+
+    def marcar_completada(self, tara_id: int, estado: bool = True) -> Tarea:
+      t = self.buscar_por_id(tarea_id)
+      if not t:
+        raise ValueError("No existe una tarea con ese ID.")
+      t.completada = bool(estado)
+      t.actualizada_en = ahora_iso()
+      return t
+
+    def eliminar(self, tarea_id: int) -> None:
+      t = self.buscar_por_id(tarea_id)
+      if not t:
+        raise ValueError("No existe una tara con ese ID.")
+      self._tareas = [x for x in self._tareas if x.id != tarea_id]
+
+    def to_json_list(self) -> List[Dict[str, Any]]:
+      return [t.to_dict() for t in self._tareas]
+
+    @staticmethod
+    def from_json_list(data: List[Dict[str, Any]]) -> "GestorTareas":
+      tareas = []
+      for item in data:
+        if isinstance(item, dict):
+          tareas.append(Tarea.from_dict(item))
+      return GestorTareas(tareas)
+
+
 
