@@ -1,0 +1,152 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.contenedor {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 16px;
+}
+
+.encabezado {
+  margin-bottom: 16px;
+}
+
+.subtitulo {
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+.panel {
+  background: #111c33;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.formulario {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.formulario input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0b1224;
+  color: #e2e8f0;
+  outline: none;
+}
+
+.formulario button {
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #38bdf8;
+  color: #0b1224;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn-filtro {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0b1224;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.btn-filtro.activo {
+  border-color: #38bdf8;
+}
+
+.btn-filtro.peligro {
+  border-color: rgba(239,68,68,0.5);
+  color: #fecaca;
+}
+
+.lista {
+  background: #111c33;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.lista h2 {
+  margin-bottom: 12px;
+}
+
+#lista-tareas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #0b1224;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.item .texto {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.item .titulo {
+  font-weight: 700;
+}
+
+.item .meta {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.item.completada .titulo {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.acciones button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: transparent;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.acciones button:hover {
+  border-color: #38bdf8;
+}
+
+.mensaje-vacio {
+  margin-top: 12px;
+  opacity: 0.8;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lista de tareas</title>
+  <link rel="stylesheet" href="./css/estilos.css" />
+</head>
+<body>
+  <main class="contenedor">
+    <header class="encabezado">
+      <h1>✅ Lista de tareas</h1>
+      <p class="subtitulo">Versión Web (HTML + CSS + JS)</p>
+    </header>
+
+    <section class="panel">
+      <form id="form-agregar" class="formulario">
+        <input
+          id="input-tarea"
+          type="text"
+          placeholder="Escribe una tarea (ej: Estudiar JS 30 min)"
+          autocomplete="off"
+        />
+        <button id="btn-agregar" type="submit">Agregar</button>
+      </form>
+
+      <div class="filtros">
+        <button class="btn-filtro" data-filtro="todas">Todas</button>
+        <button class="btn-filtro" data-filtro="pendientes">Pendientes</button>
+        <button class="btn-filtro" data-filtro="completadas">Completadas</button>
+        <button class="btn-filtro peligro" id="btn-limpiar">Limpiar todo</button>
+      </div>
+    </section>
+
+    <section class="lista">
+      <h2>Tareas</h2>
+      <ul id="lista-tareas"></ul>
+      <p id="mensaje-vacio" class="mensaje-vacio">No tienes tareas todavía.</p>
+    </section>
+  </main>
+
+  <!-- Importante: type="module" permite usar import/export -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
