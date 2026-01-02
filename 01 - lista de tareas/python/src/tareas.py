@@ -34,8 +34,8 @@ class Tarea:
       raise ValueError("El titulo no puede exceder 80 caracteres.")
     return titulo
 
-  class GestorTareas:
-    def __init__(self, lista: Optional[List[Tarea]] = None):
+class GestorTareas:
+    def __init__(self, lista: Optional[List["Tarea"]] = None):
       self._tareas: List[Tarea] = lista or []
       self._normalizar_ids()
 
@@ -53,7 +53,7 @@ class Tarea:
     def _siguiente_id(self) -> int:
       return(max((t.id for t in self._tareas), default=0)+1)
 
-    def listar(self, filtro: str = "todas") -> List[Tarea]:
+    def listar(self, filtro: str = "todas") -> List["Tarea"]:
       filtro = filtro.lower().strip()
       if filtro == "pendientes":
         return [t for t in self._tareas if not t.completada]
@@ -61,7 +61,7 @@ class Tarea:
         return [t for t in self._tareas if t.completada]
       return list(self._tareas)
 
-    def buscar_por_id(self, tarea_id: int) -> Optional[Tarea]:
+    def buscar_por_id(self, tarea_id: int) -> Optional["Tarea"]:
       for t in self._tareas:
         if t.id == tarea_id:
           return t
