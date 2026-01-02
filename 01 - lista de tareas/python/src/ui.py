@@ -5,7 +5,7 @@ from src.tareas import GestorTareas
 RUTA_DB ="tareas.json"
 
 def pedir_entero(mensaje: str) -> int:
-  raw = input(mensaje),strip()
+  raw = input(mensaje).strip()
   if raw == "":
     raise ValueError("Debes de ingresar un numero.")
   if not raw.isdigit():
@@ -18,7 +18,7 @@ def imprimir_tareas(gestor: GestorTareas, filtro: str) -> None:
     print("\n(No hay tareas para mostrar)\n")
     return
 
-  print("\nID Estado itulo")
+  print("\nID Estado Titulo")
   print("--  ------  ------------------------------")
   for t in tareas:
     estado = "APROBADO" if t.completada else "ESPERANDO"
@@ -43,57 +43,57 @@ def imprimir_tareas(gestor: GestorTareas, filtro: str) -> None:
 
     while True:
       menu()
-      option = input("\nElige una opcion: ").strip()
+      option = input("\n Elige una opcion: ").strip()
 
       try:
-            if opcion == "1":
+            if option == "1":
                 titulo = input("Título de la tarea: ")
                 t = gestor.crear(titulo)
                 guardar_json(RUTA_DB, gestor.to_json_list())
-                print(f"\n✅ Tarea creada (ID {t.id}).\n")
+                print(f"\n Tarea creada (ID {t.id}).\n")
 
-            elif opcion == "2":
+            elif option == "2":
                 imprimir_tareas(gestor, "todas")
 
-            elif opcion == "3":
+            elif option == "3":
                 imprimir_tareas(gestor, "pendientes")
 
-            elif opcion == "4":
+            elif option == "4":
                 imprimir_tareas(gestor, "completadas")
 
-            elif opcion == "5":
+            elif option == "5":
                 tarea_id = pedir_entero("ID de la tarea a editar: ")
                 nuevo = input("Nuevo título: ")
                 gestor.editar(tarea_id, nuevo)
                 guardar_json(RUTA_DB, gestor.to_json_list())
-                print("\n✏️  Tarea actualizada.\n")
+                print("\n  Tarea actualizada.\n")
 
-            elif opcion == "6":
+            elif option == "6":
                 tarea_id = pedir_entero("ID de la tarea a completar: ")
                 gestor.marcar_completada(tarea_id, True)
                 guardar_json(RUTA_DB, gestor.to_json_list())
-                print("\n✅ Marcada como completada.\n")
+                print("\n Marcada como completada.\n")
 
-            elif opcion == "7":
+            elif option == "7":
                 tarea_id = pedir_entero("ID de la tarea a dejar pendiente: ")
                 gestor.marcar_completada(tarea_id, False)
                 guardar_json(RUTA_DB, gestor.to_json_list())
-                print("\n⏳ Marcada como pendiente.\n")
+                print("\n Marcada como pendiente.\n")
 
-            elif opcion == "8":
+            elif option == "8":
                 tarea_id = pedir_entero("ID de la tarea a eliminar: ")
                 gestor.eliminar(tarea_id)
                 guardar_json(RUTA_DB, gestor.to_json_list())
-                print("\n🗑️  Tarea eliminada.\n")
+                print("\n  Tarea eliminada.\n")
 
-            elif opcion == "0":
+            elif option == "0":
                 print("\n¡Listo! Cerrando...\n")
                 break
 
             else:
                 print("\nOpción inválida.\n")
 
-        except ValueError as e:
-            print(f"\n Alerta  {e}\n")
-        except Exception as e:
-            print(f"\n Error inesperado: {e}\n")
+      except ValueError as e:
+          print(f"\n Alerta  {e}\n")
+      except Exception as e:
+          print(f"\n Error inesperado: {e}\n")
