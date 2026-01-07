@@ -25,3 +25,12 @@ export function agregarTarea(titulo){
 }
 
 //Alterna completada (true/false) por ID
+export function alternarCompletada(id){
+  const tareas = leerTareas();
+  const tarea = tareas.find(t => t.id === id);
+
+  if (nuevas.length === tareas.length) return false;
+
+  guardarTareas(nuevas);
+  return true;
+}
