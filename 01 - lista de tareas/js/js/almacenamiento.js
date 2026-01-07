@@ -9,6 +9,19 @@ export function leerTareas(){
   try{
     return JSON.parse(texto);
   }catch{
+    //sie el JSON se corrompe por alguna razon, evitamos que reviente la app.
     return[];
   }
 }
+//guardar el arreglo de tareas en localstorage
+export function guardarTareas(tareas){
+  const texto = JSON.stringify(tareas);
+  localStorage.setItem(CLAVE_STORAGE, texto);
+}
+
+//borrar todo
+export function limpiarTareas(){
+  localStorage.removeItem(CLAVE_STORAGE);
+}
+
+
