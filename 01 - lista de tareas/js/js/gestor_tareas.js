@@ -34,3 +34,14 @@ export function alternarCompletada(id){
   guardarTareas(nuevas);
   return true;
 }
+
+//Eliminar por ID
+export function eliminarTarea(id){
+  const tareas = leerTareas();
+  const nuevas = tareas.filter(t => t.id !== id);
+
+  if(nuevas.length === tareas.length) return false;
+
+  guardarTareas(nuevas);
+  return true;
+}
