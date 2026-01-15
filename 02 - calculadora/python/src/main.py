@@ -42,11 +42,11 @@ def main() -> None:
       elif opcion == "3":
         resultado = multiplicar(a,b)
         operacion = "multiplicar"
-      elif opcion == "4":
+      else:
         resultado = dividir(a,b)
         operacion = "dividir"
 
-        print(f"Resultado de la Operación {operacion}: {resultado}")
+      print(f"Resultado de la Operación {operacion}: {resultado}")
 
     except ZeroDivisionError as e:
       print(f"Error: {e}")
