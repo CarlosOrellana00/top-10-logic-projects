@@ -1,46 +1,47 @@
 import { leerTareas, guardarTareas } from "./almacenamiento.js";
 
-//devolver todas las tareas
-export function obtenerTareas(){
+// Devolver todas las tareas
+export function obtenerTareas() {
   return leerTareas();
 }
 
-//agregar una tarea nueva
-export function agregarTarea(titulo){
+// Agregar una tarea nueva
+export function agregarTarea(titulo) {
   const tareas = leerTareas();
 
   const texto = titulo.trim();
-  if(texto.length === 0) return null;
+  if (texto.length === 0) return null;
 
   const nueva = {
     id: Date.now(),
     titulo: texto,
     completa: false,
-    creada_en: new Date().toISOString().slice(0,10),
+    creada_en: new Date().toISOString().slice(0, 10),
   };
 
   tareas.push(nueva);
-  guardarTareas(tareas)
+  guardarTareas(tareas);
   return nueva;
 }
 
-//Alterna completada (true/false) por ID
-export function alternarCompletada(id){
+// Alterna completada (true/false) por ID
+export function alternarCompletada(id) {
   const tareas = leerTareas();
-  const tarea = tareas.find(t => t.id === id);
+  const tarea = tareas.find((t) => t.id === id);
 
-  if (nuevas.length === tareas.length) return false;
+  if (!tarea) return false;
 
-  guardarTareas(nuevas);
+  tarea.completa = !tarea.completa;
+  guardarTareas(tareas);
   return true;
 }
 
-//Eliminar por ID
-export function eliminarTarea(id){
+// Eliminar por ID
+export function eliminarTarea(id) {
   const tareas = leerTareas();
-  const nuevas = tareas.filter(t => t.id !== id);
+  const nuevas = tareas.filter((t) => t.id !== id);
 
-  if(nuevas.length === tareas.length) return false;
+  if (nuevas.length === tareas.length) return false;
 
   guardarTareas(nuevas);
   return true;
