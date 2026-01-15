@@ -1,4 +1,4 @@
-import { leerTareas, guardarTareas } from "./almacenamiento";
+import { leerTareas, guardarTareas } from "./almacenamiento.js";
 
 //devolver todas las tareas
 export function obtenerTareas(){
