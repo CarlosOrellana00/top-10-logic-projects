@@ -20,3 +20,25 @@ def main()-> None:
   secreto = generar_numero(minimo, maximo)
   intentos = 0
 
+  print(f"Estoy pensando un numero entre {minimo} y {maximo}.")
+  print(f"Tienes {intentos_max} intentos .\n")
+
+  while intentos < intentos_max:
+    intento = pedir_entero(f"Intento N°{intentos +1}: ")
+    intentos += 1
+
+    resultado = evaluar_intento(secreto, intento)
+
+    if resultado == "correcto":
+      print(f"EXCELENTE!!! solo te tomo {intentos} intento(s).")
+      break
+    elif resultado == "alto":
+      print("Muy Alto!. intenta un numero menor")
+    else:
+      print("Muy Bajo, intenta un numero mas alto")
+
+  else:
+    print(f"LO SIENTO, se acabaron los intentos. el numero correcto era: {secreto}")
+
+if __name__ == "__main__":
+  main()
