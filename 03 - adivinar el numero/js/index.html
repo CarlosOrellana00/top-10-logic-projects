@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proyecto 03 - Adivinar el número</title>
+  <link rel="stylesheet" href="./css/estilos.css" />
+</head>
+<body>
+  <main class="contenedor">
+    <h1> Adivinar el número</h1>
+    <p class="subtitulo">Versión Web (HTML + CSS + JS)</p>
+
+    <section class="panel">
+      <div class="fila">
+        <label for="minimo">Mínimo</label>
+        <input id="minimo" type="number" placeholder="1" />
+      </div>
+
+      <div class="fila">
+        <label for="maximo">Máximo</label>
+        <input id="maximo" type="number" placeholder="100" />
+      </div>
+
+      <div class="botones">
+        <button id="btnIniciar">Iniciar</button>
+        <button id="btnReiniciar" class="secundario" disabled>Reiniciar</button>
+      </div>
+
+      <hr class="linea" />
+
+      <p id="info" class="info">Define un rango y presiona Iniciar.</p>
+
+      <div class="fila">
+        <label for="intento">Tu intento</label>
+        <input id="intento" type="number" placeholder="Ej: 50" />
+      </div>
+
+      <div class="botones">
+        <button id="btnProbar" disabled>Probar</button>
+      </div>
+
+      <p id="intentos" class="intentos">Intentos: 0 / 7</p>
+
+      <div id="estado" class="estado" data-tipo="info">Listo para comenzar.</div>
+    </section>
+  </main>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
