@@ -84,8 +84,21 @@ btnProbar.addEventListener("click", () => {
 
   const resultado = evaluarIntento(secreto,intento);
 
+  if(resultado === "correcto"){
+    setEstado("¡Correcto! Adivinaste en ${intentos} intentos(s)", "ok");
+    juegoActivo = false;
+    btnActivo.disabled = true;
+    return;
+  }
 
-
+  if(resultado === "alto"){
+    setEstado("Muy Alto. intenta un numero menor","info");
+  }else{
+    setEstado("Muy Bajo, intenta un numero mayor","info");
+  }
+  inputIntento.select();
 });
+
+//6.- Reiniciar.
 
 
