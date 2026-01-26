@@ -100,5 +100,18 @@ btnProbar.addEventListener("click", () => {
 });
 
 //6.- Reiniciar.
+btnReiniciar.addEventListener("click",() =>{
+  secreto = null;
+  intentos = 0;
+  juegoActivo = false;
+
+  info.textContent = "Define un rango y presiona Iniciar";
+  setEstado("Listo para comenzar","info");
+  intentosUI.textContent ="Intentos: 0 / 7";
+
+  inputIntento.value ="";
+  btnProbar.disabled = true;
+  btnReiniciar = true;
+});
 
 
