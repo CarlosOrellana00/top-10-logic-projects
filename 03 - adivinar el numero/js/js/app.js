@@ -1,8 +1,7 @@
 import { generarSecreto, evaluarIntento } from "./juego.js";
 
-// 1.- Referencias al HTML
 const inputMin = document.getElementById("minimo");
-const inputMax = document.getElementById("minimo");
+const inputMax = document.getElementById("maximo");
 const inputIntento = document.getElementById("intento");
 
 const btnIniciar = document.getElementById("btnIniciar");
@@ -13,41 +12,35 @@ const info = document.getElementById("info");
 const estado = document.getElementById("estado");
 const intentosUI = document.getElementById("intentos");
 
-//2.- estado del juego
 let secreto = null;
 let intentos = 0;
 let intentosMax = 7;
 let juegoActivo = false;
 
-//3.. Helpers
-function leerEntero(input){
-  const texto = input.value.trim();
-  const n = Number(texto);
-  if(texto === "" || !Number.isInteger(n)) return null;
-  return n;
+function leerEntero(input) {
+  const n = parseInt(input.value, 10);
+  return Number.isNaN(n) ? null : n;
 }
 
-function setEstado(texto, tipo = "info"){
+function setEstado(texto, tipo = "info") {
   estado.textContent = texto;
   estado.dataset.tipo = tipo;
 }
 
-function actualizarIntentos(){
+function actualizarIntentos() {
   intentosUI.textContent = `Intentos: ${intentos} / ${intentosMax}`;
 }
 
-//4.- iniciar juego
 btnIniciar.addEventListener("click", () => {
   const min = leerEntero(inputMin);
   const max = leerEntero(inputMax);
 
-  if(min == null || max === null){
-    setEstado("Debes de ingresar minimo y maximo como enteros.","error");
+  if (min === null || max === null) {
+    setEstado(" Debes ingresar mínimo y máximo como enteros.", "error");
     return;
   }
-
-  if(min >= max){
-    setEstado("El minimo debe de ser menor que el numero maximo.","error");
+  if (min >= max) {
+    setEstado(" El mínimo debe ser menor que el máximo.", "error");
     return;
   }
 
@@ -55,63 +48,68 @@ btnIniciar.addEventListener("click", () => {
   intentos = 0;
   juegoActivo = true;
 
-  info,textContent = `Estoy pensando un numero entre ${min} y ${max}`;
-  setEstado("Juego Iniciado, ingresa tu numero.", "ok");
+  info.textContent = `Estoy pensando un número entre ${min} y ${max}.`;
+  setEstado(" Juego iniciado. Ingresa tu intento.", "ok");
 
   actualizarIntentos();
-  inputIntento.value ="";
+  inputIntento.value = "";
   inputIntento.focus();
 
   btnProbar.disabled = false;
   btnReiniciar.disabled = false;
 });
 
-//5.- probar intento
 btnProbar.addEventListener("click", () => {
-  if(!juegoActivo){
-    setEstado("Primero debes de inicia el juego","error");
+  if (!juegoActivo) {
+    setEstado(" Primero debes iniciar el juego.", "error");
     return;
   }
 
   const intento = leerEntero(inputIntento);
-  if(intento === null){
-    setEstado("Ingresa un numero entero valido.","error");
+  if (intento === null) {
+    setEstado(" Ingresa un número entero válido.", "error");
     return;
   }
 
   intentos++;
   actualizarIntentos();
 
-  const resultado = evaluarIntento(secreto,intento);
+  const resultado = evaluarIntento(secreto, intento);
 
-  if(resultado === "correcto"){
-    setEstado("¡Correcto! Adivinaste en ${intentos} intentos(s)", "ok");
+  if (resultado === "correcto") {
+    setEstado(` ¡Correcto! Adivinaste en ${intentos} intento(s).`, "ok");
     juegoActivo = false;
-    btnActivo.disabled = true;
+    btnProbar.disabled = true;
     return;
   }
 
-  if(resultado === "alto"){
-    setEstado("Muy Alto. intenta un numero menor","info");
-  }else{
-    setEstado("Muy Bajo, intenta un numero mayor","info");
+  if (intentos >= intentosMax) {
+    setEstado(` Se acabaron los intentos. El número era: ${secreto}`, "error");
+    juegoActivo = false;
+    btnProbar.disabled = true;
+    return;
   }
+
+  setEstado(
+    resultado === "alto"
+      ? " Muy alto. Intenta un número menor."
+      : " Muy bajo. Intenta un número mayor.",
+    "info"
+  );
+
   inputIntento.select();
 });
 
-//6.- Reiniciar.
-btnReiniciar.addEventListener("click",() =>{
+btnReiniciar.addEventListener("click", () => {
   secreto = null;
   intentos = 0;
   juegoActivo = false;
 
-  info.textContent = "Define un rango y presiona Iniciar";
-  setEstado("Listo para comenzar","info");
-  intentosUI.textContent ="Intentos: 0 / 7";
+  info.textContent = "Define un rango y presiona Iniciar.";
+  setEstado("Listo para comenzar.", "info");
+  intentosUI.textContent = "Intentos: 0 / 7";
 
-  inputIntento.value ="";
+  inputIntento.value = "";
   btnProbar.disabled = true;
-  btnReiniciar = true;
+  btnReiniciar.disabled = true;
 });
-
-
