@@ -67,6 +67,25 @@ btnIniciar.addEventListener("click", () => {
 });
 
 //5.- probar intento
+btnProbar.addEventListener("click", () => {
+  if(!juegoActivo){
+    setEstado("Primero debes de inicia el juego","error");
+    return;
+  }
 
+  const intento = leerEntero(inputIntento);
+  if(intento === null){
+    setEstado("Ingresa un numero entero valido.","error");
+    return;
+  }
+
+  intentos++;
+  actualizarIntentos();
+
+  const resultado = evaluarIntento(secreto,intento);
+
+
+
+});
 
 
