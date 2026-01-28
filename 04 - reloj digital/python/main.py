@@ -39,3 +39,16 @@ class RelojDigitalApp:
   def actualizar_reloj(self) ->None:
     ahora = datetime.now()
 
+    #Formato Hora: HH:MM:SS
+    hora_str = ahora.strftime("%H:%M:%S")
+
+    #Formato Fecha: Dia, semana, dd-mm-yyyy
+    fecha_str = ahora.str.strftime("%d-%m-%Y")
+
+    self.lbl_hora.config(text=hora_str)
+    self.lbl_fecha.config(text=fecha_str)
+
+    #Repute cada 200ms (forma suave)
+    self.root.after(200, self.actualizar_reloj)
+
+
