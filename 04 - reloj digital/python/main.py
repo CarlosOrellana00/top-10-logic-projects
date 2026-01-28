@@ -17,7 +17,7 @@ class RelojDigitalApp:
     self.lbl_hora = tk.Label(
       self.root,
       text="00:00:00",
-      font=("Consolas",52,"bold")
+      font=("Consolas",52,"bold"),
       fg="00ff99",
       bg="#0b0f14"
     )
@@ -36,7 +36,7 @@ class RelojDigitalApp:
     #Arranque del LOOP de actualizacion
     self.actualizar_reloj()
 
-  def actualizar_reloj(self) ->None:
+  def actualizar_reloj(self) -> None:
     ahora = datetime.now()
 
     #Formato Hora: HH:MM:SS
@@ -51,4 +51,10 @@ class RelojDigitalApp:
     #Repute cada 200ms (forma suave)
     self.root.after(200, self.actualizar_reloj)
 
+def main()-> None:
+  root = tk.Tk()
+  app = RelojDigitalApp(root)
+  root.mainloop()
 
+if __name__ == "main":
+  main()
