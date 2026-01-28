@@ -1,5 +1,5 @@
 import tkinter as tk
-from datetime import date
+from datetime import datetime
 
 class RelojDigitalApp:
   def __init__(self, root: tk.Tk) -> None:
@@ -11,14 +11,14 @@ class RelojDigitalApp:
     self.root.geometry("420x180")
 
     #Fondo oscuro tipo digital
-    self.root.configure(bg="0b0f14")
+    self.root.configure(bg="#0b0f14")
 
     #Etiqueta principal(pantalla del reloj)
     self.lbl_hora = tk.Label(
       self.root,
       text="00:00:00",
       font=("Consolas",52,"bold"),
-      fg="00ff99",
+      fg="#00ff99",
       bg="#0b0f14"
     )
     self.lbl_hora.pack(pady=(25,0))
@@ -43,7 +43,7 @@ class RelojDigitalApp:
     hora_str = ahora.strftime("%H:%M:%S")
 
     #Formato Fecha: Dia, semana, dd-mm-yyyy
-    fecha_str = ahora.str.strftime("%d-%m-%Y")
+    fecha_str = ahora.strftime("%d-%m-%Y")
 
     self.lbl_hora.config(text=hora_str)
     self.lbl_fecha.config(text=fecha_str)
@@ -56,5 +56,5 @@ def main()-> None:
   app = RelojDigitalApp(root)
   root.mainloop()
 
-if __name__ == "main":
+if __name__ == "__main__":
   main()
