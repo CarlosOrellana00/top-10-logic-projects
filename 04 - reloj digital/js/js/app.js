@@ -30,9 +30,31 @@ function construirHora(ahora){
 }
 
 //5.- Construye la fecha DD-MM-YYY
+function construirFecha(ahora){
+  const dia = ahora.getDate();
+  const mes = ahora.getMouth() +1;
+  const anio = ahora.getFullYear();
+
+  return `${pad2(dia)}-${pad2(mes)}-${anio}`;
+}
 
 //6.- Actualiza la pantalla (fecha - hora) y se llama en bucle
+function actualizarReloj(){
+  const ahora = new Date();
+
+  horaEl.textContent = construirHora(ahora);
+  fechaEl.textContent = construirFecha(ahora);
+}
 
 //7.- Evento del boton alternar formato
+btnFormato.addEventListener("click", () => {
+  formato24 = !formato24;
+  btnFormato.textContent = `Formato: ${formato24 ? "24h" : "12h" }`;
+
+  //Aciliar al instante que note un cambio
+  actualizarReloj();
+});
 
 //8.- Inicio del programa
+actualizarReloj();
+setInterval(actualizarReloj, 200);
