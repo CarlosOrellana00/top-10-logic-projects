@@ -49,9 +49,9 @@ function actualizarReloj(){
 //7.- Evento del boton alternar formato
 btnFormato.addEventListener("click", () => {
   formato24 = !formato24;
-  btnFormato.textContent = `Formato: ${formato24 ? "24h" : "12h" }`;
+  btnFormato.textContent = `Formato: ${formato24 ? "24h" : "12h"}`;
 
-  //Aciliar al instante que note un cambio
+  // Actualizamos al instante para que el cambio se note al tiro
   actualizarReloj();
 });
 
