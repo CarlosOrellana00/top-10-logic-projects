@@ -47,7 +47,16 @@ function resetear(){
 }
 
 // 6.- Eventos de Botones
+btnMas.addEventListener("click",incrementar);
+btnMenos.addEventListener("click",decrementar);
+btnReset.addEventListener("click",resetear);
 
 // 7.- Atajos de teclado
+document.addEventListener("keydown", (e) => {
+  if(e.key === "ArrowUp") incrementar();
+  if(e.key === "ArrowDown") decrementar();
+  if(e.key === "r" || e.key === "R") resetear();
+});
 
 // 8.- Inicio del Programa
+render();
