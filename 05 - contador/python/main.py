@@ -38,7 +38,55 @@ class ContadorApp:
     frame_paso = tk.Frame(self.root, bg = "#0b0f14")
     frame_paso.pack(pady=(0,12))
 
-
+    lbl_paso = tk.Label(
+      frame_paso,
+      text = "Paso",
+      font=("Consolas",12),
+      fg ="#c7d0d9",
+      bg="#0b0f14"
+    )
+    lbl_paso.pack(side="left",padx=(0,8))
 
     # StringVar permite leer/modificar el contenido del Entry fácilmente
+    self.paso_var = tk.StringVar(value="1")
+
+    self.entry_paso = tk.Entry(
+      frame_paso,
+      textvariable = self.paso_var,
+      width = 6,
+      font =("Consolas",12)
+    )
+    self.entry_paso.pack(side="left")
+
     # Botones
+    frame_botones = tk.Frame(self.root, bg="#0b0f14")
+    frame_botones.pack(pady=(0,8))
+
+    btn_menos = tk.Button(
+      frame_botones,
+      text="-",
+      width=8,
+      font=("Consolas",12,"bold"),
+      command = self.decrementar
+    )
+    btn_menos.pack(side="left",padx=6)
+
+    btn_reset = tk.Button(
+      frame_borones,
+      text="Reset",
+      width=8,
+      font=("Consolas",12,"bold"),
+      command =  self.resetear
+    )
+    btn_reset.pack(side="left",padx=6)
+
+    btn_mas = tk.Button(
+      frame_botones,
+      text="+",
+      width = 8,
+      font=("Consols",12,"bold"),
+      command= self.incrementar
+    )
+    btn_mas.pack(side="left",padx=5)
+
+    # Atajos de teclado
