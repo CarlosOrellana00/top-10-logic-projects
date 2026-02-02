@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinder import messagebox
 
+# Test de Ventana
 # root = tk.Tk()
 # root.title("Prueba Tkinder - Clima")
 # root.geometry("320x120")
@@ -60,6 +61,14 @@ class ClimaApp:
     self.entry_pais.grid(row=0, column=3, pady=6)
 
     #4.- Boton Buscar
+    self.btn_buscar = tk.Button(
+      frame_busqueda,
+      text="Buscar clima",
+      font=("Consolas",12,"bold"),
+      command=self.buscar_clima
+    )
+    self.btn_buscar.grid(row=1,column=0, columnspan=4, pady=(10,0))
+
     #5.- Zona de resultado
     #6.- Caja grande para pronostico
     #7.- Atajo Enter para buscar
