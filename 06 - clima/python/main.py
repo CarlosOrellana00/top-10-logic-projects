@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinder import messagebox
+from tkinter import messagebox
 
 # Test de Ventana
 # root = tk.Tk()
@@ -24,17 +24,17 @@ class ClimaApp:
       fg="#c7d0d9",
       bg="#0b0f14"
     )
-    titulo.pack(pady==(16,10))
+    titulo.pack(pady=(16,10))
 
     #3.- Zona de busqueda (Ciudad y País)
-    frame_busqueda = tk.Frame(self.root, bg="0b0f14")
+    frame_busqueda = tk.Frame(self.root, bg="#0b0f14")
     frame_busqueda.pack(pady=(0,10))
 
     tk.Label(
       frame_busqueda, text="Ciudad",
       font=("Consolas",12),
       fg="#c7d0d9", bg="#0b0f14"
-    ).grid(row=0, colum=0, padx=(0,0), pady=6, sticky="e")
+    ).grid(row=0, column=0, padx=(0,0), pady=6, sticky="e")
 
     self.ciudad_var = tk.StringVar(value="Santiago")
     self.entry_ciudad = tk.Entry(
@@ -52,7 +52,7 @@ class ClimaApp:
     ).grid(row=0,column=2, padx=(18,8), pady=6, sticky="e")
 
     self.pais_var = tk.StringVar(value="Chile")
-    self.entry_ciudad = tk.Entry(
+    self.entry_pais = tk.Entry(
       frame_busqueda,
       textvariable=self.pais_var,
       width=18,
@@ -79,13 +79,14 @@ class ClimaApp:
       justify="left",
       wraplength=520
     )
+    self.lbl_resumen.pack(pady=(12, 10))
 
     #6.- Caja grande para pronostico
     self.text_pronostico = tk.Text(
       self.root,
       height=14,
       width=64,
-      font=("Cosolas",10),
+      font=("Consolas",10),
       bg="#0f1621",
       fg="#c7d0d9",
       borderwidth=1
@@ -95,5 +96,29 @@ class ClimaApp:
 
     #7.- Atajo Enter para buscar
     self.root.bind("<Return>", lambda e: self.buscar_clima())
+
+  def buscar_clima(self) -> None:
+
+    ciudad = self.ciudad_var.get().strip()
+    pais = self.pais_var.get().strip()
+
+    if not ciudad or not pais:
+      messagebox.showwarning("Campos vacios","Debes escribir Ciudad y País.")
+      return
+
+    # si todo va bien, lo mostramos como previisualizacion
+    self.lbl_resumen.config(
+      text=f"Listo para buscar: {ciudad}, {pais}",
+      fg="#c7d0d9"
+    )
+
+
+def main()->None:
+  root = tk.Tk()
+  app = ClimaApp(root)
+  root.mainloop()
+
+if __name__ == "__main__":
+  main()
 
 
