@@ -70,8 +70,30 @@ class ClimaApp:
     self.btn_buscar.grid(row=1,column=0, columnspan=4, pady=(10,0))
 
     #5.- Zona de resultado
-    #6.- Caja grande para pronostico
-    #7.- Atajo Enter para buscar
+    self.lbl_resumen = tk.Label(
+      self.root,
+      text="Escribe una ciudad y país, y presiona 'Buscar Clima'.",
+      font=("Consolas",11),
+      fg="#7f8c99",
+      bg="#0b0f14",
+      justify="left",
+      wraplength=520
+    )
 
+    #6.- Caja grande para pronostico
+    self.text_pronostico = tk.Text(
+      self.root,
+      height=14,
+      width=64,
+      font=("Cosolas",10),
+      bg="#0f1621",
+      fg="#c7d0d9",
+      borderwidth=1
+    )
+    self.text_pronostico.pack(pady=(0,10))
+    self.text_pronostico.configure(state="disabled")
+
+    #7.- Atajo Enter para buscar
+    self.root.bind("<Return>", lambda e: self.buscar_clima())
 
 
