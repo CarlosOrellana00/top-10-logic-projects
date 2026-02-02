@@ -1,5 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox
+import requests
+
+GEOCODING_URL = "https://geocoding-api.open-meteo.com/v1/search"
+FORECAST_URL = "https://api.open-meteo.com/v1/forecast"
 
 # Test de Ventana
 # root = tk.Tk()
@@ -112,8 +116,117 @@ class ClimaApp:
       fg="#c7d0d9"
     )
 
+    try:
+      self.btn_buscar.config(state="disabled")
 
-def main()->None:
+      geo = self.geocodificar(ciudad, pais)
+      nombre = geo.get("name", ciudad)
+      admin1 = geo.get("admin1", "")
+      country = geo.get("country", pais)
+      lat = geo["latitude"]
+      lon = geo["longitude"]
+      tz = geo.get("timezone", "auto")
+
+      clima = self.obtener_clima(lat, lon, tz)
+
+      current = clima.get("current_weather", {})
+      temp = current.get("temperature", "N/A")
+      wind = current.get("windspeed", "N/A")
+      time = current.get("time", "N/A")
+
+      ubicacion = f"{nombre}"
+      if admin1:
+        ubicacion += f", {admin1}"
+      ubicacion += f", {country}"
+
+      self.lbl_resumen.config(
+        text=(
+          f"Ubicación: {ubicacion}\n"
+          f"Hora dato: {time}\n"
+          f"Temperatura actual: {temp}°C\n"
+          f"Viento: {wind} km/h"
+        ),
+        fg="#c7d0d9"
+      )
+
+      daily = clima.get("daily", {})
+      dates = daily.get("time", [])
+      tmax = daily.get("temperature_2m_max", [])
+      tmin = daily.get("temperature_2m_min", [])
+      rain = daily.get("precipitation_sum", [])
+
+      lines = ["Pronóstico (7 días):\n"]
+      for i in range(min(len(dates), 7)):
+        lines.append(f"- {dates[i]} | Máx: {tmax[i]}°C | Mín: {tmin[i]}°C | Lluvia: {rain[i]} mm")
+
+      self.text_pronostico.configure(state="normal")
+      self.text_pronostico.delete("1.0", "end")
+      self.text_pronostico.insert("end", "\n".join(lines))
+      self.text_pronostico.configure(state="disabled")
+
+    except requests.exceptions.RequestException:
+      messagebox.showerror("Error de conexión", "No se pudo conectar al servicio de clima.")
+    except ValueError as e:
+      messagebox.showwarning("No encontrado", str(e))
+    finally:
+      self.btn_buscar.config(state="normal")
+
+  #
+  # def geocodificar(self, ciudad: str, pais: str) -> dict:
+  #   query = f"{ciudad}, {pais}".strip()
+  #   params = {"name": query, "count": 1, "language": "es", "format": "json"}
+  #   r = requests.get(GEOCODING_URL, params=params, timeout=10)
+  #   r.raise_for_status()
+  #   data = r.json()
+
+  #   if "results" not in data or not data["results"]:
+  #     raise ValueError("No se encontró la ciudad/país. Revisa la escritura.")
+
+  #   return data["results"][0]
+
+  def geocodificar(self, ciudad: str, pais: str) -> dict:
+
+    params = {
+        "name": ciudad.strip(),
+        "count": 10,
+        "language": "es",
+        "format": "json"
+    }
+
+    r = requests.get(GEOCODING_URL, params=params, timeout=10)
+    r.raise_for_status()
+    data = r.json()
+
+    results = data.get("results", [])
+    if not results:
+        raise ValueError("No se encontró la ciudad. Revisa la escritura.")
+
+    pais_usuario = pais.strip().casefold()
+    if pais_usuario:
+        filtrados = []
+        for item in results:
+            country_name = str(item.get("country", "")).casefold()
+            if pais_usuario in country_name:
+                filtrados.append(item)
+
+        if filtrados:
+            return filtrados[0]
+
+    return results[0]
+
+  def obtener_clima(self, lat: float, lon: float, tz: str) -> dict:
+    params = {
+        "latitude": lat,
+        "longitude": lon,
+        "current_weather": True,
+        "timezone": tz,
+        "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum"
+    }
+    r = requests.get(FORECAST_URL, params=params, timeout=10)
+    r.raise_for_status()
+    return r.json()
+
+def main() -> None:
   root = tk.Tk()
   app = ClimaApp(root)
   root.mainloop()
