@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clima</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="card">
+      <h1 class="titulo">Consulta de Clima</h1>
+
+      <div class="fila">
+        <label class="label" for="ciudad">Ciudad</label>
+        <input id="ciudad" class="input" type="text" value="Santiago" />
+
+        <label class="label" for="pais">País</label>
+        <input id="pais" class="input" type="text" value="Chile" />
+      </div>
+
+      <div class="fila">
+        <button id="btnBuscar" class="btn">Buscar clima</button>
+      </div>
+
+      <p id="resumen" class="resumen">
+        Escribe una ciudad y país, y presiona “Buscar clima”.
+      </p>
+
+      <pre id="pronostico" class="pronostico"></pre>
+    </section>
+  </main>
+
+  <script src="./js/app.js"></script>
+</body>
+</html>

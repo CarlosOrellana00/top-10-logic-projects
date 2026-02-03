@@ -171,19 +171,6 @@ class ClimaApp:
     finally:
       self.btn_buscar.config(state="normal")
 
-  #
-  # def geocodificar(self, ciudad: str, pais: str) -> dict:
-  #   query = f"{ciudad}, {pais}".strip()
-  #   params = {"name": query, "count": 1, "language": "es", "format": "json"}
-  #   r = requests.get(GEOCODING_URL, params=params, timeout=10)
-  #   r.raise_for_status()
-  #   data = r.json()
-
-  #   if "results" not in data or not data["results"]:
-  #     raise ValueError("No se encontró la ciudad/país. Revisa la escritura.")
-
-  #   return data["results"][0]
-
   def geocodificar(self, ciudad: str, pais: str) -> dict:
 
     params = {
