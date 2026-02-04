@@ -115,6 +115,11 @@ async function buscarClima() {
     const clima = await obtenerClima(lat, lon, tz);
     const current = clima.current_weather || {};
 
+    // 🔹 GUARDAR ÚLTIMA CONSULTA (PWA / OFFLINE)
+    localStorage.setItem("ultimoClima", JSON.stringify(clima));
+    localStorage.setItem("ultimaUbicacion", ubicacion);
+    localStorage.setItem("ultimaFechaGuardado", new Date().toISOString());
+
     renderResumen({
       ubicacion,
       time: current.time ?? "N/A",
@@ -138,3 +143,10 @@ btnBuscar.addEventListener("click", buscarClima);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Enter") buscarClima();
 });
+
+// 9.- Registrar el Service Worker
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./js/sw.js");
+  });
+}
