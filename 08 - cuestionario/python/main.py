@@ -4,7 +4,7 @@ from quiz import ejecutar_quiz
 
 def main():
   print("=== 08 - Cuestionario (Python) ===")
-  nombre = leer_texto_no_vacio("Ingresa tu nombre")
+  nombre = leer_texto_no_vacio("Ingresa tu nombre: ")
 
   ejecutar_quiz(nombre=nombre, banco=PREGUNTAS, cantidad_preguntas=10)
 
