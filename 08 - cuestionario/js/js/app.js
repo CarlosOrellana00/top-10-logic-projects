@@ -20,6 +20,11 @@ const mensajeFinalEl = document.getElementById("mensajeFinal");
 const btnReiniciar = document.getElementById("btnReiniciar");
 
 // 2.- Estado del juego
+let jugador = "";
+let preguntasJuego = []; // 10 preguntas elegidas
+let indice = 0;
+let correctas = 0;
+let puntaje = 0;
 
 // 3.- Utilidades
 
