@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>08 - Cuestionario</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>08 - Cuestionario (JS)</h1>
+
+    <!-- Pantalla de inicio -->
+    <section id="pantallaInicio" class="card">
+      <h2>Inicio</h2>
+      <p>Ingresa tu nombre para comenzar. Se mostrarán 10 preguntas (de un banco de 15).</p>
+
+      <label for="nombre">Nombre:</label>
+      <input id="nombre" type="text" placeholder="Ej: Gabriel" />
+
+      <button id="btnIniciar">Iniciar</button>
+
+      <p id="errorInicio" class="error"></p>
+    </section>
+
+    <!-- Pantalla de juego -->
+    <section id="pantallaJuego" class="card hidden">
+      <div class="row">
+        <div>
+          <p><strong>Jugador:</strong> <span id="nombreJugador"></span></p>
+          <p><strong>Pregunta:</strong> <span id="progreso"></span></p>
+        </div>
+        <div>
+          <p><strong>Puntaje:</strong> <span id="puntaje">0</span></p>
+        </div>
+      </div>
+
+      <h2 id="enunciado"></h2>
+
+      <!-- Contenedor de alternativas -->
+      <div id="opciones" class="opciones"></div>
+
+      <button id="btnSiguiente" class="hidden">Siguiente</button>
+
+      <p id="feedback" class="feedback"></p>
+    </section>
+
+    <!-- Pantalla de resultado -->
+    <section id="pantallaResultado" class="card hidden">
+      <h2>Resultado final</h2>
+
+      <p id="resumenFinal"></p>
+      <p id="mensajeFinal" class="feedback"></p>
+
+      <button id="btnReiniciar">Jugar otra vez</button>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="./js/preguntas.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
