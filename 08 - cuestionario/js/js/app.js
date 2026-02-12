@@ -180,3 +180,6 @@ btnSiguiente.addEventListener("click", siguiente);
 btnReiniciar.addEventListener("click", reiniciar);
 
 // Enter inicia desde el input nombre
+nombreInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") iniciar();
+});
