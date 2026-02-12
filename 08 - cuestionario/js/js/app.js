@@ -140,9 +140,43 @@ function terminar() {
 }
 
 // 8.- Iniciar Juego
+function iniciar() {
+  const nombre = nombreInput.value.trim();
+  if (!nombre) {
+    errorInicio.textContent = "Debes ingresar tu nombre para comenzar.";
+    return;
+  }
+  errorInicio.textContent = "";
+  jugador = nombre;
+
+  // Estado inicial
+  preguntasJuego = seleccionarPreguntas(PREGUNTAS, 10);
+  indice = 0;
+  correctas = 0;
+  puntaje = 0;
+
+  // Pintar jugador y mostrar primera pregunta
+  nombreJugadorEl.textContent = jugador;
+
+  // Cambiar pantalla
+  pantallaInicio.classList.add("hidden");
+  pantallaResultado.classList.add("hidden");
+  pantallaJuego.classList.remove("hidden");
+
+  mostrarPregunta();
+}
 
 // 9.- Reiniciar
+function reiniciar() {
+  nombreInput.value = "";
+  pantallaResultado.classList.add("hidden");
+  pantallaJuego.classList.add("hidden");
+  pantallaInicio.classList.remove("hidden");
+}
 
 // 10.- Eventos
+btnIniciar.addEventListener("click", iniciar);
+btnSiguiente.addEventListener("click", siguiente);
+btnReiniciar.addEventListener("click", reiniciar);
 
 // Enter inicia desde el input nombre
